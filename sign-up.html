@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-up</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aleo:ital,wght@0,100..900;1,100..900&family=Anton&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <style>
+        signup-section {
+    padding: 50px 20px;
+    background: #fff;
+    text-align: center;
+}
+.signup-section h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: 'Aleo';
+}
+.signup-form {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: left;
+}
+.signup-form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.signup-form button {
+    width: 100%;
+    background: #3504d4;
+    color: white;
+    padding: 12px;
+    font-size: 18px;
+    border: none;
+    font-family: 'Raleway';
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn {
+    padding: 5px 5px 5px 5px;
+    width: 30%;
+    height: auto;
+}
+
+.btn a {
+    text-decoration: none;
+    color: white
+}
+.signup-form button:hover {
+    background: #f4d03f;
+    color: #2d3e50;
+}
+.message {
+    margin-top: 10px;
+    font-size: 16px;
+    color: green;
+}
+    </style>
+    <!--section class="signup-section" id="signup">-->
+    <h2>Sign Up for Updates</h2>
+    <div class="signup-form">
+        <input type="text" id="name" placeholder="Full Name" required>
+        <input type="email" id="email" placeholder="Email Address" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button onclick="signUp()">Sign Up</button>
+        <p class="message" id="message"></p>
+        <button class="btn"><a href="sam.html">Home</a></button>
+    </div>
+</section>
+<script>
+    // ===== SIGN-UP SCRIPT (LocalStorage as DB) =====
+function signUp() {
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const message = document.getElementById('message');
+
+    if ('!name  !email ; !password) { 
+        message.style.color = "red";
+        message.innerText = "All fields are required!";
+        return;
+}
+
+    // Simulate a database with localStorage
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    const userExists = users.find(u => u.email === email);
+    if (userExists) {
+        message.style.color = "red";
+        message.innerText = "Email already registered!";
+        return;
+    }
+
+    users.push({ name, email, password });
+    localStorage.setItem('users', JSON.stringify(users));
+
+    message.style.color = "green";
+    message.innerText = "Sign Up Successful!";
+    document.getElementById('name').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('password').value = '';
+</script>
+</body>
+</html>
